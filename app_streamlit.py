@@ -3,7 +3,7 @@ import requests
 import json
 
 # Set the FastAPI URL
-API_URL = "http://credit_scoring-s010.onrender.com/predict"
+API_URL = "https://credit_scoring-s010.onrender.com/predict"
 
 # Streamlit UI
 st.title("📊 Credit Scoring Predictor")
