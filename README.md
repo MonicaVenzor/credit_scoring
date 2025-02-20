@@ -1,91 +1,119 @@
-# 📊 Credit Scoring API - Loan Default Prediction
+🛡️ Credit Scoring API using Machine Learning
 
-[![Deploy to Render](https://img.shields.io/badge/Live%20API-Online-green)](https://credit_scoring-s010.onrender.com)
-[![FastAPI](https://img.shields.io/badge/Made%20With-FastAPI-blue)](https://fastapi.tiangolo.com/)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+🚀 A FastAPI-powered credit scoring system using XGBoost. This API predicts the likelihood of loan default based on applicant financial data.
 
-## 🚀 Project Overview
-This is a **machine learning API** that predicts whether a loan applicant is likely to **default** on their payments or not.
-The model was trained using **XGBoost** and deployed with **FastAPI**.
+📌 Features
+✔ FastAPI for real-time credit risk prediction
+✔ XGBoost Model trained on financial applicant data
+✔ Custom Decision Threshold for improved accuracy
+✔ Endpoints for Real-Time Predictions
+✔ Streamlit UI for user-friendly interaction
 
-🔗 **Live API:** [credit_scoring-s010.onrender.com](https://credit_scoring-s010.onrender.com)
-📑 **API Docs:** [Swagger UI](https://credit_scoring-s010.onrender.com/docs)
+📂 Project Structure
 
----
+credit_scoring/
+   ├── 📂 app/
+   │   ├── app.py
+   ├── 📂 data/
+   │   ├── cs-test.csv
+   │   ├── cs-training.csv
+   │   ├── Data Dictionary.xls
+   │   ├── sampleEntry.csv
+   ├── 📂 models/
+   │   ├── credit_scoring_xgb_best.pkl
+   │   ├── scaler.pkl
+   │   ├── threshold.pkl
+   ├── 📂 notebooks/
+   │   ├── credit_scoring_prediction.ipynb
+   ├── 📂 scripts/
+   ├── venv_credit/ (excluded from Git)
+   ├── .gitignore
+   ├── app_streamlit.py
+   ├── README.md
+   ├── requirements_streamlit.txt
+   ├── requirements.txt
+   ├── start.sh
 
-## 🛠️ Features
-✅ Predicts loan default risk (`0` = No Default, `1` = Default)
-✅ Uses **XGBoost** for high-accuracy classification
-✅ Fully deployed via **Render**
-✅ JSON-based REST API with **FastAPI**
+🚀 Installation & Usage
 
----
-
-## 📦 Installation
-To run the API locally:
-
-1️⃣ **Clone the Repository**
-```bash
-git clone https://github.com/MonicaVenzor/credit_scoring.git
+1️⃣ Clone the Repository
+git clone https://github.com/YOUR_GITHUB_USERNAME/credit_scoring.git
 cd credit_scoring
 
-2️⃣ Create a Virtual Environment
+2️⃣ Create a Virtual Environment & Install Dependencies
 python -m venv venv
-source venv/bin/activate  # (Mac/Linux)
-venv\Scripts\activate     # (Windows)
-
-3️⃣ Install Dependencies
+source venv/bin/activate  # Mac/Linux
+venv\Scripts\activate  # Windows
 pip install -r requirements.txt
 
-4️⃣ Run FastAPI Locally
+3️⃣ Run the FastAPI Server
 uvicorn app.app:app --reload
 
-📌 Local API will be available at:
+The API will be available at 👉 http://127.0.0.1:8000/docs
 
-Swagger Docs: http://127.0.0.1:8000/docs
-Prediction Endpoint: http://127.0.0.1:8000/predict
+🌐 API Endpoints
 
-🔥 API Usage
-➤ POST /predict
-Send a JSON payload to get a loan default prediction.
+Method   Endpoint           Description
 
-📤 Request
-{
-  "RevolvingUtilizationOfUnsecuredLines": 0.5,
-  "age": 35,
-  "NumberOfTime30-59DaysPastDueNotWorse": 1,
-  "DebtRatio": 0.3,
-  "MonthlyIncome": 5000,
-  "NumberOfOpenCreditLinesAndLoans": 4,
-  "NumberOfTimes90DaysLate": 0,
-  "NumberRealEstateLoansOrLines": 2,
-  "NumberOfTime60-89DaysPastDueNotWorse": 0,
-  "NumberOfDependents": 1
-}
+GET         /                Home Page
 
-📥 Response
+POST        /predict/      Predict Loan Default Risk
+
+📌 Example Request (JSON)
 
 {
-  "prediction": 0,
-  "probability_of_default": 0.0886,
-  "decision_threshold": 0.1849
+    "RevolvingUtilizationOfUnsecuredLines": 0.5,
+    "age": 35,
+    "NumberOfTime30-59DaysPastDueNotWorse": 1,
+    "DebtRatio": 0.3,
+    "MonthlyIncome": 5000,
+    "NumberOfOpenCreditLinesAndLoans": 4,
+    "NumberOfTimes90DaysLate": 0,
+    "NumberRealEstateLoansOrLines": 2,
+    "NumberOfTime60-89DaysPastDueNotWorse": 0,
+    "NumberOfDependents": 1
 }
 
-⚙️ Model & Training
-Dataset: Kaggle - Give Me Some Credit
-Algorithm: XGBoost (Optimized with Hyperparameter Tuning)
-Preprocessing: StandardScaler for feature scaling
+📌 Example Response
 
-🚀 Deployment
-This project is deployed on Render.
-To deploy a new version:
+{
+    "prediction": 0,
+    "probability_of_default": 0.0886,
+    "decision_threshold": 0.1849
+}
 
-1️⃣ Push changes to GitHub
-git add .
-git commit -m "Updated model"
-git push origin main
+🛠️ Deployment
 
-2️⃣ Render will automatically detect the changes & redeploy the API.
+📦 Deploy to Render
+1️⃣ Link GitHub repo to Render.com
+2️⃣ Set root directory as app/
+- Build Command: pip install -r requirements.txt
+- Start Command: uvicorn app:app --host 0.0.0.0 --port $PORT
+3️⃣ Deploy and access API at: https://your-app-name.onrender.com
 
-👤 Author
-Monica Venzor
+📦 Deploying Streamlit UI
+1️⃣ Install Streamlit dependencies
+pip install -r requirements_streamlit.txt
+
+2️⃣ Run Streamlit Locally
+streamlit run app_streamlit.py
+
+3️⃣ Deploy on Streamlit Cloud
+
+Go to Streamlit Cloud
+
+Connect your GitHub repository
+
+Select app_streamlit.py as the main entry file
+
+Deploy 🎉
+4️⃣ Access your deployed Streamlit dashboard at:
+https://your-streamlit-app.streamlit.app
+
+🎯 Next Steps
+🔹 Improve Model Performance with better hyperparameter tuning
+🔹 Optimize feature selection for better predictive power
+🔹 Enhance UI with additional insights and charts
+
+👨‍💻 🏆 Author: Monica Venzor
+📌 GitHub Repo: credit_scoring
