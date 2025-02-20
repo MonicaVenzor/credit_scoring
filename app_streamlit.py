@@ -38,7 +38,8 @@ if st.sidebar.button("Predict"):
     }
 
     # Send request to FastAPI
-    response = requests.post(API_URL, json=input_data)
+    response = requests.post(API_URL, json=input_data, verify=False)
+
 
     if response.status_code == 200:
         prediction = response.json()
